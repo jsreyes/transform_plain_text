@@ -1,22 +1,41 @@
-import * as React from 'react';
 import './App.css';
 
-import logo from './logo.svg';
+import { History } from 'history'
+import * as React from 'react';
+import { Route } from 'react-router'
 
-class App extends React.Component {
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+// Contenedores
+import UploadFile from './container/UploadFile'
+
+// Creando interface para APP
+interface IAppProps {
+ history: History
+}
+
+class App extends React.Component<IAppProps> {
+
+ public state = {
+  loading: true,
+ }
+
+ public componentDidMount() {
+    if (/\app\/./.test(location.pathname)) {
+     const { history } = this.props
+     history.push('/')
+    }
+   // tslint:disable-next-line:no-console
+   this.setState({
+    loading: false
+   })
+ }
+
+ public render() {
+  return (
+  <div>
+    <Route exact={true} path='/' component={UploadFile} />
+   </div>
+  );
+ }
 }
 
 export default App;
