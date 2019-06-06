@@ -14,21 +14,6 @@ interface IAppProps {
 
 class App extends React.Component<IAppProps> {
 
- public state = {
-  loading: true,
- }
-
- public componentDidMount() {
-    if (/\app\/./.test(location.pathname)) {
-     const { history } = this.props
-     history.push('/')
-    }
-   // tslint:disable-next-line:no-console
-   this.setState({
-    loading: false
-   })
- }
-
  public render() {
   return (
   <div>

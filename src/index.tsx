@@ -1,6 +1,6 @@
 import './index.css';
 
-import createHistory from 'history/createBrowserHistory';
+// import createHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 // Importando redux
@@ -11,10 +11,11 @@ import { applyMiddleware, combineReducers, createStore  } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { reducer as formReducer } from 'redux-form'
 import thunk from 'redux-thunk';
+import history from './history';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import service from './service';
+// import service from './service';
 import * as reducers from './thunks';
 
 // Creando el store para pasarle al provider
@@ -22,16 +23,13 @@ const store = createStore(combineReducers({
  ...reducers,
  form: formReducer
 }), composeWithDevTools(
- applyMiddleware(thunk.withExtraArgument(service))
+ applyMiddleware(thunk)
 ))
-
-// Creando la const de history que necesita el Router
-const history = createHistory();
 
 ReactDOM.render(
  <Provider store={store}>
   <Router history={history}>
-   <App history={history} />
+   <App history={history}/>
   </Router>
  </Provider>
 
