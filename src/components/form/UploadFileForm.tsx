@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 
-// Se importa el archivo con las validaciones
-// import validate from '../../helpers/validators/validate'
-
 // Importando componentes
 import Button from '../Button'
 import Center from '../Center'
-// import Input from '../Input'
 import InputFile from '../InputFile'
 
 
@@ -16,7 +12,6 @@ class UploadFileForm extends React.Component<InjectedFormProps> {
   const { handleSubmit } = this.props
   return (
    <form onSubmit={handleSubmit}>
-    {/* <Field label="Archivo Plano" placeholder="Carga tu archivo plano" name="file" type="file" component={Input} /> */}
     <Field label="Archivo Plano" placeholder="Carga tu archivo plano" name="file" type="file" component={InputFile} />
     <Center>
       <Button block={'valid'}>Enviar</Button>
