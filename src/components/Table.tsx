@@ -11,19 +11,20 @@ const styleTable = {
   table: {
     border: '1px solid black',
     borderCollapse: 'collapse',
-    marginBottom: '40px',
+    marginBottom: '15px',
     textAlign: 'center'
   } as React.CSSProperties,
   
 } 
 interface ITableProps {
- array: []
+ array: [],
+ ubigeo: string
 }
 
 const Table: React.StatelessComponent<ITableProps> = props => {
- const { array } = props
+ const { array, ubigeo } = props
  return (
-  
+  <div> {ubigeo}
   <table style={styleTable.table}>
       <thead>
         <tr>
@@ -44,6 +45,7 @@ const Table: React.StatelessComponent<ITableProps> = props => {
       ) : ''}
       </tbody>
     </table>
+  </div>
  )
 }
 

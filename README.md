@@ -24,6 +24,8 @@ cd transform_plain_text
 yarn install
 ```
 
+IMPORTANT: Download and run back_read_file before to test app.
+
 ### Start The App
 
 - Start the server by running:

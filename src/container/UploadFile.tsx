@@ -26,9 +26,9 @@ class UploadFile extends React.Component<IUploadFileProps> {
      <Title>Read File</Title>
       <UploadFileForm onSubmit={uploadFile}/>                                    
     </Card>
-    {departaments ? <Table array={departaments}/> : ''}
-    {provinces ? <Table array={provinces}/> : ''}
-    {districts ? <Table array={districts}/> : ''}
+    {departaments ? <Table array={departaments} ubigeo='Departamentos'/> : ''}
+    {provinces ? <Table array={provinces} ubigeo='Provincias'/> : ''}
+    {districts ? <Table array={districts} ubigeo='Distritos'/> : ''}
    </Container>
   )
  }
