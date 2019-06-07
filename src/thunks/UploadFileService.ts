@@ -73,9 +73,6 @@ export const uploadFile = ({ file }: IUploadFile) =>
   async (dispatch: Dispatch, getState: () => any) => {
     dispatch(fetchUploadFile(file))
 
-         // tslint:disable-next-line:no-console
-        //  console.log(file, ' llego el file')
-
     const formData = new FormData();
     formData.append('file', file);
 
@@ -97,27 +94,51 @@ export const uploadFile = ({ file }: IUploadFile) =>
     //   data: result
     //  }
      // tslint:disable-next-line:no-console
-     console.log(result.length);
-     const x: string[] = []
-     const y: string[] = []
-     const z: string[] = []
+     let departaments: any = [];
+     let provinces: any = [];
+     const districts: any = [];
 
-     const d = result.map((departament: string) => result.indexOf(departament) % 3 === 0 ? x.push(departament) : undefined);
-     const p = result.map((province: string) => result.indexOf(province) % 3 === 1 ? y.push(province) : undefined);
-     const ds = result.map((district: string) => result.indexOf(district) % 3 === 2 ? z.push(district) : undefined);
+     result.map((ubigeo: string) => {
+      const dep = ubigeo.split(' ');
+       if(result.indexOf(ubigeo) % 3 === 0 ) {
+        departaments.push({cod: dep[0], nombre: dep[1]});
+       } else if(result.indexOf(ubigeo) % 3 === 1) {
+        // tslint:disable-next-line:no-console
+        console.log(result[result.indexOf(ubigeo)-1], ' este es el padre');
+        const padre = result[result.indexOf(ubigeo)-1].split(' ');
+        provinces.push({cod: dep[0], nombre: dep[1], codPa: padre[0], nomPadre: padre[1]})
+       } else if(result.indexOf(ubigeo) % 3 === 2) {
+        const padre = result[result.indexOf(ubigeo)-1].split(' ');
+        districts.push({cod: dep[0], nombre: dep[1], codPa: padre[0], nomPadre: padre[1]})
+       }
+    });
+    
+    const a = new Set(departaments.map(JSON.stringify));
+    departaments = Array.from(a);
+    // departaments = [...a]
+
+    provinces = provinces.filter((item: any, pos: any,) => {
+      // tslint:disable-next-line:no-console
+      console.log(item, ' este es item');
+            // tslint:disable-next-line:no-console
+            console.log(provinces[pos], ' esta es la posicion');
+       // tslint:disable-next-line:no-console
+       console.log(provinces.indexOf(item.code), ' esta es la index of');
+      return item !== provinces[pos]
+    })
 
       // tslint:disable-next-line:no-console
-      console.log(d, p, ds, ' este es el arreglo de departamentos');
+      console.log(departaments, ' este es el arreglo de departamentos');
+      // // tslint:disable-next-line:no-console
+      // console.log(, ' este es el arreglo de departamentos');
       // tslint:disable-next-line:no-console
-      console.log(x, ' este es el arreglo de departamentos');
+      console.log(provinces.filter(Boolean), ' este es el arreglo de provincias');
       // tslint:disable-next-line:no-console
-      console.log(y, ' este es el arreglo de provincias');
-      // tslint:disable-next-line:no-console
-      console.log(z, ' este es el arreglo de distritos');
+      console.log(districts, ' este es el arreglo de distritos');
 
-     const departaments = ['Lima', 'Arequipa'];
-     const districts = ['Distrito 1', 'Distrito 2'];
-     const provinces = ['Provincia 1', 'Provincia 2'];
+    //  const departaments = ['Lima', 'Arequipa'];
+    //  const districts = ['Distrito 1', 'Distrito 2'];
+    //  const provinces = ['Provincia 1', 'Provincia 2'];
   
      dispatch(fetchUploadFileSuccess(departaments, provinces, districts))
   
