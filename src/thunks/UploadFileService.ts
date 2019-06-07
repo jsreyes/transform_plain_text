@@ -1,4 +1,5 @@
 import { AnyAction, Dispatch } from 'redux';
+import { environment } from '../environment/environment'
 import Utils from '../helpers/Utils';
 
 // Creando acciones
@@ -80,7 +81,7 @@ export const uploadFile = ({ file }: IUploadFile) =>
     formData.append('file', file);
     
     // Url del endpoint
-    const url = 'http://localhost:5000/read';
+    const url = environment.api;
 
     try {
      const result = await fetch(url, {
